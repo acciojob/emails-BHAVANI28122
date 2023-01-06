@@ -9,17 +9,6 @@ public class Gmail extends Email {
     //Inbox: Stores mails. Each mail has date (Date), sender (String), message (String). It is guaranteed that message is distinct for all mails.
     //Trash: Stores mails. Each mail has date (Date), sender (String), message (String)
 
-    private static class Mail {
-        Date date;
-        String sender;
-        String message;
-
-        Mail(Date date, String sender, String message) {
-            this.date = date;
-            this.sender = sender;
-            this.message = message;
-        }
-    }
     ArrayList<Mail> Inbox;
     ArrayList<Mail> Trash;
     public Gmail(String emailId, int inboxCapacity) {

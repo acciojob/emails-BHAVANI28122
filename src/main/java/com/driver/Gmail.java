@@ -27,16 +27,21 @@ public class Gmail extends Email {
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already
 
         if (Inbox.size() == inboxCapacity) {
-            Trash.add(Inbox.remove(0));
+           Mail m = Inbox.get(0);
+           Inbox.remove(0);
+           Trash.add(m);
         }
-            Inbox.add(new Mail(date, sender, message));
+        Mail m = new Mail(date, sender, message);
+        Inbox.add(m);
     }
 
     public void deleteMail(String message){
         // Each message is distinct
         // If the given message is found in any mail in the inbox, move the mail to trash, else do nothing
+
         for (int i = 0; i < Inbox.size(); i++) {
-            if (Inbox.get(i).message.equals(message)) {
+            Mail m = Inbox.get(i);
+            if (m.message.equals(message)) {
                 Trash.add(Inbox.remove(i));
                 return;
             }
@@ -46,19 +51,21 @@ public class Gmail extends Email {
     public String findLatestMessage(){
         // If the inbox is empty, return null
         // Else, return the message of the latest mail present in the inbox
-        if(Inbox.size() == 0){
+        if(Inbox.isEmpty()){
             return null;
         }
-        return Inbox.get(Inbox.size() - 1).toString();
+        Mail m = Inbox.get(Inbox.size()-1);
+        return m.message;
     }
 
     public String findOldestMessage(){
         // If the inbox is empty, return null
         // Else, return the message of the oldest mail present in the inbox
-         if(Inbox.size() == 0){
+         if(Inbox.isEmpty()){
             return null;
          }
-         return Inbox.get(0).toString();
+         Mail m = Inbox.get(0);
+         return m.message;
 
     }
 
